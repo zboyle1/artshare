@@ -26,7 +26,7 @@ function user_nav($user) {
     <li><a href="/artshare/places/search.php">Search</a></li>
     <li><a onclick="logout()">Logout</a></li>
     </ul>
-    USERLINKS;
+USERLINKS;
 }
 ?>
 
