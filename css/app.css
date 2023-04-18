@@ -1,0 +1,35 @@
+body {
+    background: #a0a0a0;
+}
+
+a{
+    color:#2034a5;
+}
+
+a:hover{
+    color: #162E27;
+}
+
+#logo {
+    background-color: #797979;
+    color: #000000;
+
+}
+
+#nav {
+    background-color: #a0a0a0;
+
+}
+
+#content {
+    background-color: #FFF;
+    padding-top: 0.5em;
+}
+#footer {
+    padding-top: 0.5em;
+    background-color: #a0a0a0;
+}
+
+#message {
+    display: none;
+}
