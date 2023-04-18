@@ -1,4 +1,4 @@
-const account = "/artshare/ajax/accountnajax.php";
+const account = "/artshare/ajax/accountajax.php";
 
 // Login functions
 
@@ -40,7 +40,7 @@ function signup() {
     err = "";
 
     if( user != "" && pass != "") {
-        $.post(account, {"cmd": "signup", "newuser": newuser, "newpass": newpass, "emai": email, "dob": dob}, function(data) {
+        $.post(account, {"cmd": "signup", "newuser": newuser, "newpass": newpass, "email": email, "dob": dob}, function(data) {
             if(data == '0') {
                 err = "Invalid birthday input";
 

@@ -22,7 +22,7 @@ if (!$conn) {
 function isvalid ($user, $pass) {	
     global $conn;
 
-    $sql = "SELECT * FROM Member WHERE username = '$user' AND password = '$pass'";
+    $sql = "SELECT * FROM Member WHERE username = '$user' AND passwrd = '$pass'";
     $result = $conn->query($sql);
 
     if (mysqli_num_rows($result) == 0) {
@@ -67,7 +67,7 @@ function signup() {
         return;
     }
 
-    $insert = "INSERT INTO Member (member_id, username, password, e-mail, birthday, join_date) VALUES (1000, '$user', '$pass','$email','$dob', curdate());";
+    $insert = "INSERT INTO Member (member_id, username, passwrd, e_mail, birthday, join_date) VALUES (1000, '$user', '$pass','$email','$dob', curdate());";
     $result = $conn->query($insert);
 
     $sql = "SELECT username FROM Member WHERE username = '$user';";
@@ -82,6 +82,8 @@ function signup() {
     setcookie("user",$user,time() + (86400 * 30), "/");
     echo '3';
 }
+
+$cmd = $_POST['cmd'];
 
 if($cmd == 'login') {
     login();
