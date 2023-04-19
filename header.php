@@ -15,9 +15,8 @@ function guest_nav() {
 GUESTLINKS;
 }
 
-function user_nav($user) {
+function user_nav() {
     echo <<<USERLINKS
-    <p>Gold: {$_SESSION['gold']} </p>
     <ul class="vertical menu">
     <li><a href="/artshare/index.php">Home</a></li>
     <li><a href="/artshare/places/profile.php?user={$_SESSION['user']}">Profile</a></li>
@@ -57,5 +56,5 @@ USERLINKS;
             <div id="content" class="grid-x grid-margin-x">
 
                 <div id = "nav" sclass="cell large-2 medium-2 small-2 cell-auto-height">
-                    <?php !$_SESSION['user'] ? guest_nav() : user_nav($user); ?>
+                    <?php !$_SESSION['user'] ? guest_nav() : user_nav(); ?>
                 </div>
