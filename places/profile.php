@@ -7,6 +7,7 @@
     <div class="grid-x grid-padding-x" id = "profile">
         <div class="cell" id="pagetitle">
             <h2><?php echo $user ?>'s profile</h2> 
+            <a class="button" <?php echo ($_SESSION['user'] != $user) ? '' : 'style="display:none;"';?> href="/artshare/places/request.php?artist='<?php echo $user ?>'">Request commission</a>
         </div>
         <div class ="cell">
 
