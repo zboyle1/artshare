@@ -1,8 +1,64 @@
-Petsite
-
 ## TO DO
 
     ## SQL:
+
+        ## keywords
+
+        CREATE VIEW keywords AS
+        SELECT submission_id, TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(keywords, ',', numbers.n), ',', -1)) AS keyword
+        FROM
+        (SELECT 1 n UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4) numbers
+        INNER JOIN Submission ON CHAR_LENGTH(keywords) - CHAR_LENGTH(REPLACE(keywords, ',', '')) >= numbers.n - 1;
+
+        ##log in 
+
+        SELECT * FROM Member WHERE username = '$user' AND passwrd = '$pass'
+
+        ##signup
+
+        INSERT INTO Member (member_id, username, passwrd, e_mail, birthday, join_date) VALUES (1000, '$user', '$pass','$email','$dob', curdate());
+
+        ## index
+
+            ## for you
+
+            SELECT s.submission_id
+            FROM Submission s
+            JOIN (
+                SELECT k.submission_id, COUNT(*) AS keyword_count
+                FROM keywords k
+                JOIN (
+                    SELECT submission_id FROM Comments WHERE member_id = 1234
+                    UNION ALL
+                    SELECT submission_id FROM Favorite WHERE member_id = 1234
+                ) temp ON k.submission_id = temp.submission_id
+                GROUP BY k.submission_id
+            ORDER BY keyword_count DESC
+            LIMIT 3
+            ) top_submissions ON s.submission_id = top_submissions.submission_id
+            ORDER BY s.upload_date DESC
+            LIMIT 6
+
+            ## newest
+
+            SELECT submission_id FROM Submission ORDER BY upload_date DESC LIMIT 6
+
+            ## popular
+
+            SELECT submission_id, COUNT(*) as favorite_count
+            FROM Favorite
+            GROUP BY submission_id
+            ORDER BY favorite_count DESC
+            LIMIT 6
+
+            ## talked about
+
+            SELECT submission_id
+            FROM Comments
+            GROUP BY submission_id
+            ORDER BY COUNT(*) DESC
+            LIMIT 6
+
 
         ## getting information for profile
 
@@ -20,8 +76,6 @@ Petsite
                 LIMIT 1) s1 ON Submission.member_id = s1.member_id
             WHERE Member.member_id = $userid;
 
-            Then, fetch results and store them in an array. call the profile values when you need them
-
         ## display commissions youre waiting on
 
             SELECT commission_id, username AS artist, start_date, price, payment
@@ -30,8 +84,6 @@ Petsite
             WHERE commissioner_id = $userid
             AND finish_date IS NULL
             ORDER BY start_date ASC;
-
-            Fetch results, display in a table
 
         ## display commission to do list
 
@@ -50,7 +102,7 @@ Petsite
             WHERE commissioner_id = $userid
             AND finish_date IS NOT NULL
             ORDER BY finish_date DESC;
-
+s
         ## display finished commissions
 
             SELECT commission_id, username AS commissioner, finish_date, price, payment
@@ -60,23 +112,9 @@ Petsite
             AND finish_date IS NOT NULL
             ORDER BY finish_date DESC;
 
-
-    
-    ## PLACES
-    _______________________________________________________________________
-    | Page        | Started | Front end | Back end | Touch-ups | Finished |
-    |-------------|---------|-----------|----------|-----------|----------|
-    | index       |    X    |           |          |           |          |
-    | login       |         |           |          |           |     X    |
-    | signup      |         |           |          |           |     X    |
-    | profile     |    X    |           |          |           |          |
-    | submit      |         |           |          |           |          |
-    | commissions |         |           |          |           |          |
-    | search      |         |           |          |           |          |
-    |-------------|---------|-----------|----------|-----------|----------|
-
     ## AJAX: 
             - code to display profile
+            - user can edit own profile
 
         ## submissions
             - submit a piece
@@ -95,20 +133,10 @@ Petsite
         ## commission
             - start a commission
             - finish a commission
-            - display commissions that youre waiting on
-            - display commission todo list
-            - display finished commissions list
 
         ## search
             - search based on keyword
             - display search results
 
-        ## front page
-            - display 'for you'
-                -finds submissions based on ones youve liked and commented on
-            - display newest
-            - display most favorited
-            - display most commented
-
         
-        
+## TESTING
