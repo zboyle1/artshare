@@ -67,8 +67,8 @@ Petsite
     | Page        | Started | Front end | Back end | Touch-ups | Finished |
     |-------------|---------|-----------|----------|-----------|----------|
     | index       |    X    |           |          |           |          |
-    | login       |    X    |           |          |           |          |
-    | signup      |    X    |           |          |           |          |
+    | login       |         |           |          |           |     X    |
+    | signup      |         |           |          |           |     X    |
     | profile     |    X    |           |          |           |          |
     | submit      |         |           |          |           |          |
     | commissions |         |           |          |           |          |
@@ -76,8 +76,6 @@ Petsite
     |-------------|---------|-----------|----------|-----------|----------|
 
     ## AJAX: 
-            - login and logout
-            - sign up
             - code to display profile
 
         ## submissions
@@ -107,7 +105,7 @@ Petsite
 
         ## front page
             - display 'for you'
-                - this will be a view, which finds submissions based on ones youve liked and commented on
+                -finds submissions based on ones youve liked and commented on
             - display newest
             - display most favorited
             - display most commented
