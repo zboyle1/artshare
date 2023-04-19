@@ -1,4 +1,5 @@
 const account = "/artshare/ajax/accountajax.php";
+const commission = "/artshare/ajax/commissionsajax.php";
 
 // Login functions
 
@@ -62,4 +63,34 @@ function signup() {
         });
         return(false);
     }
+}
+
+// Show commission based on status and commissioner/artist
+
+function showunfinished(userid) {
+    $.post(commission, {"cmd": "unfinished", "user": userid},function(data) {
+        $("#unfinished").append(data);
+    });
+    return(false);
+}
+
+function showtodo(userid) {
+    $.post(commission, {"cmd": "todo", "user": userid},function(data) {
+        $("#todo").append(data);
+    });
+    return(false);
+}
+
+function showreceived(userid) {
+    $.post(commission, {"cmd": "received", "user": userid},function(data) {
+        $("#received").append(data);
+    });
+    return(false);
+}
+
+function showfinished(userid) {
+    $.post(commission, {"cmd": "finished", "user": userid},function(data) {
+        $("#finished").append(data);
+    });
+    return(false);
 }
