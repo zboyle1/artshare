@@ -1,5 +1,6 @@
 const account = "/artshare/ajax/accountajax.php";
 const commission = "/artshare/ajax/commissionsajax.php";
+const submission = "/artshare/ajax/submissionajax.php";
 
 // Login functions
 
@@ -91,6 +92,40 @@ function showreceived(userid) {
 function showfinished(userid) {
     $.post(commission, {"cmd": "finished", "user": userid},function(data) {
         $("#finished").append(data);
+    });
+    return(false);
+}
+
+// Front page functions
+
+function foryou(userid) {
+    $.post(submission, {"cmd": "foryou", "user": userid},function(data) {
+        if(data == '0') {
+            $("#optional").css("display", "none");
+        } else {
+            $("#foryou").html(data);
+        }
+    });
+    return(false);
+}
+
+function newest() {
+    $.post(submission, {"cmd": "newest"},function(data) {
+        $("#newest").html(data);
+    });
+    return(false);
+}
+
+function popular() {
+    $.post(submission, {"cmd": "popular"},function(data) {
+        $("#popular").html(data);
+    });
+    return(false);
+}
+
+function talkedabout() {
+    $.post(submission, {"cmd": "talkedabout"},function(data) {
+        $("#talkedabout").html(data);
     });
     return(false);
 }
