@@ -102,7 +102,7 @@
             WHERE commissioner_id = $userid
             AND finish_date IS NOT NULL
             ORDER BY finish_date DESC;
-s
+
         ## display finished commissions
 
             SELECT commission_id, username AS commissioner, finish_date, price, payment
@@ -111,6 +111,67 @@ s
             WHERE artist_id = $userid
             AND finish_date IS NOT NULL
             ORDER BY finish_date DESC;
+
+        ## page of a submission
+
+            ## display submission information
+
+                SELECT s.*, (
+                    SELECT COUNT(*) FROM Favorite WHERE submission_id = s.submission_id
+                ) AS favorite_count, (
+                    SELECT COUNT(*) FROM Comments WHERE submission_id = s.submission_id
+                ) AS comment_count
+                FROM Submission s
+                WHERE s.submission_id = $picid;
+
+            ## allow user to edit submission
+
+                UPDATE Submission 
+                SET title = 'New Title', descriptio'New Description', keywords = 'New Keyword1, New Keyword2' 
+                WHERE submission_id = $picid AND member_id = $userid;
+
+            ## allow user to delete submission
+
+                DELETE FROM Submission WHERE submission_id = $picid AND member_id = $userid;
+
+
+            ## determine if user has favorited
+
+                SELECT submission_id FROM Submission
+                WHERE submission_id IN (
+                    SELECT submission_id
+                    FROM Favorite
+                    WHERE member_id = $userid
+                );
+
+            ## add favorite
+
+                INSERT INTO Favorite (member_id, submission_id) VALUES ($user_id, $submission_id);
+
+            ## remove favorite
+
+                DELETE FROM Favorite WHERE member_id = $userid AND submission_id = $picid
+
+            ## show all commments
+
+                SELECT c.*
+                FROM Submission s
+                JOIN Comments c ON s.submission_id = c.submission_id
+                WHERE s.submission_id = $picid;
+
+            ## user delete comment
+
+                DELETE FROM Comments WHERE comment_id = $commentid AND member_id = $userid;
+
+            ## user edit comment
+
+                UPDATE Comments SET comment_body = '$newbody'
+                WHERE comment_id = $commentid AND member_id = $userid AND submission_id = $picid;
+
+
+            
+
+
 
     ## AJAX: 
             - code to display profile
