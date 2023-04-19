@@ -35,6 +35,7 @@ USERLINKS;
         <title>Artshare</title>
 
         <link rel="stylesheet" href="/artshare/css/foundation.css">
+        <link rel="stylesheet" href="/artshare/css/foundation-icons.css">
         <link rel="stylesheet" href="/artshare/css/app.css">
         <link rel="stylesheet" href="/artshare/jqueryconfirm/jquery-confirm.min.css">
 
