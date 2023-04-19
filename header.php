@@ -19,7 +19,7 @@ function user_nav() {
     echo <<<USERLINKS
     <ul class="vertical menu">
     <li><a href="/artshare/index.php">Home</a></li>
-    <li><a href="/artshare/places/profile.php?user={$_SESSION['user']}">Profile</a></li>
+    <li><a href="/artshare/places/profile.php?user={$_SESSION['user']}&display='all'">Profile</a></li>
     <li><a href="/artshare/places/submit.php">Submit a piece</a></li>
     <li><a href="/artshare/places/commission.php">Commissions</a></li>
     <li><a href="/artshare/places/search.php">Search</a></li>
