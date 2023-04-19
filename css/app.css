@@ -45,6 +45,7 @@ a:hover{
 
 .callout-wrapper {
     margin-bottom: 20px;
+    width: 100%;
 }
 
 .image-container {
@@ -60,4 +61,9 @@ a:hover{
 #index {
     min-height: 300px;
     overflow-x: scroll;
+}
+
+#about {
+    overflow: auto;
+    height: 170px;
 }
