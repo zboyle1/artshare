@@ -129,3 +129,17 @@ function talkedabout() {
     });
     return(false);
 }
+
+// submission page
+
+function showsubinfo(userid, picid) {
+    $.post(submission,{"cmd": "subpage", "userid": userid, "id": picid}, function(data){
+        if(data == '0') {
+            err = "Submission not found";
+            $("#message").html(err);
+            $("#message").css("display", "block");
+        } else {
+            $("#mainsubcontent").html(data);
+        }
+    });
+}
