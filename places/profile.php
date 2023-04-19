@@ -32,7 +32,8 @@
                 </div>
 
                 <div class = "cell large-6 medium-6 small-6">
-                    <h3 class="subheader">About</h3>
+                    <!-- The pencil will change the about section to a text area, when submitting the textarea the about will be changed and the new about will be displayed-->
+                    <h3 class="subheader">About <?php echo ($_SESSION['user'] != $user) ? '' : '<a onclick="false"><i class="fi-pencil"></i></a>';?></h3>
                     <div class = "callout" id="about"> </div>
                 </div>
                 <!-- /will be from ajax -->
