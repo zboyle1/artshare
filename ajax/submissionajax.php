@@ -46,7 +46,7 @@ function foryou() {
         while($row = mysqli_fetch_assoc($result)) {
             $id = $row['submission_id'];
 
-            echo '<a href = "/artshare/places/submission.php?=' . $id . '">' .
+            echo '<a href = "/artshare/places/submission.php?id=' . $id . '">' .
                  // '<img src="/artshare/assets/' . $id . '.png">'; 
                  '<img src="/artshare/assets/placeholder.png">' .
                  '</a>';
@@ -93,7 +93,7 @@ function popular() {
         while($row = mysqli_fetch_assoc($result)) {
             $id = $row['submission_id'];
 
-            echo '<a href = "/artshare/places/submission.php?=' . $id . '">' .
+            echo '<a href = "/artshare/places/submission.php?id=' . $id . '">' .
                  // '<img src="/artshare/assets/' . $id . '.png">'; 
                  '<img src="/artshare/assets/placeholder.png">' .
                  '</a>';
@@ -118,7 +118,7 @@ function talkedabout() {
         while($row = mysqli_fetch_assoc($result)) {
             $id = $row['submission_id'];
 
-            echo '<a href = "/artshare/places/submission.php?=' . $id . '">' .
+            echo '<a href = "/artshare/places/submission.phpid=' . $id . '">' .
                  // '<img src="/artshare/assets/' . $id . '.png">'; 
                  '<img src="/artshare/assets/placeholder.png">' .
                  '</a>';
@@ -159,7 +159,7 @@ function showsubpage() {
         $artist = $row['artist'];
         $title = $row['title'];
 
-        $allowedit = ($userid != $artistid) ? '' : ' <a href="/artshare/places/editsub.php?id=' . $picid . '"><i class="fi-pencil"></i></a>';
+        $allowedit = ($userid != $artistid) ? '' : ' <a href="/artshare/places/editsubmission.php?id=' . $picid . '"><i class="fi-pencil"></i></a>';
 
         $date = $row['upload_date'];
         $numfav = $row['favorite_count'];
@@ -231,6 +231,62 @@ function profilefav() {
 
 }
 
+function upload() {
+    global $conn;
+
+    $userid = $_POST['userid'];
+    $title = $_POST['title'];
+    $desc = $_POST['desc'];
+    $keywords = $_POST['keywords'];
+    $type = $_POST['type'];
+    $picid = 6;
+
+    if($type == 'visual') {
+        $medium = $_POST['medium'];
+        $sql2 = "INSERT INTO Imge (submission_id, medium)
+        VALUES ($picid, '$medium');";
+    } else if($type == 'written') {
+        $wordcount = $_POST['wordcount'];
+        $sql2 = "INSERT INTO Written (submission_id, word_count)
+        VALUES ($picid, $wordcount);";
+    } else if($type == 'audio') {
+        $genre = $_POST['genre'];
+        $bpm = $_POST['bpm'];
+        $sql2 = "INSERT INTO Music (submission_id, genre, bpm)
+                VALUES ($picid, '$genre', $bpm);";
+    }
+
+    $sql = "INSERT INTO Submission (submission_id, member_ID, title, upload_date, description, keywords)
+            VALUES ($picid, $userid, '$title', curdate(), '$desc', '$keywords');";
+
+    $result = $conn->query($sql);
+    $result = $conn->query($sql2);
+
+    $sql = "SELECT * FROM Submission WHERE submission_id = $picid";
+    $result = $conn->query($sql);
+
+    if(mysqli_num_rows($result) == 0) {
+        echo '0';
+    } else {
+        echo '1';
+    }
+}
+
+function edit() {
+    global $conn;
+
+    $userid = $_POST['userid'];
+    $title = $_POST['title'];
+    $desc = $_POST['desc'];
+    $picid = $_POST['picid'];
+
+    $sql = "UPDATE Submission 
+            SET title = '$title', description = '$desc'
+            WHERE submission_id = $picid AND member_id = $userid;";
+
+    $result = $conn->query($sql);
+}
+
 $cmd = $_POST['cmd'];
 
 if($cmd == 'foryou') {
@@ -247,6 +303,10 @@ if($cmd == 'foryou') {
     profilesub();
 } else if($cmd == 'profilefav') {
     profilefav();
+} else if($cmd == 'upload') {
+    upload();
+} else if($cmd == 'edit') {
+    edit();
 }
 
 mysqli_close($conn);

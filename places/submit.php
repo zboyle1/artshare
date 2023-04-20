@@ -1,6 +1,7 @@
 <?php
 	include '../header.php';
     include '../footer.php';
+    $user = $_SESSION['userid'];
 ?>
 
 <div class="cell small-10 medium-10 large-10">
@@ -14,7 +15,7 @@
         </div>
 
         <div class = "cell">
-            <form onsubmit="return(login())">
+            <form onsubmit="return(uploadsub('<?php echo $user ?>'))">
 		        <label>Title
                     <input type="text" id="title" required>
                 </label>
@@ -24,7 +25,7 @@
                 </span>
 
                 <label>Description
-                    <textarea placeholder="Write a short description about your work" name = "desc"></textarea>
+                    <textarea placeholder="Write a short description about your work" name = "desc" id="desc"></textarea>
                 </label>
 
                 <label>Keywords
@@ -64,8 +65,7 @@
 
                 <div class = "callout alert" id="message"></div>
             
-                <button class = "submit button">Login</button>
-                <a href = "/artshare/places/signup.php" class="button secondary">Sign up</a>
+                <button class = "submit button">Submit</button>
 	        </form>
         </div>
     </div>

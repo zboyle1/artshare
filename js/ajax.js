@@ -130,6 +130,67 @@ function talkedabout() {
     return(false);
 }
 
+// upload
+
+function uploadsub(userid) {
+    title = $("#title").val();
+    desc = $("#desc").val();
+    keywords = $("#keywords").val();
+    type = $('input[name=type]:checked').val();
+    if(type == 'visual') {
+        medium = $('#medium').val();
+        wordcount = "";
+        bpm = "";
+        genre = "";
+    } else if(type == 'audio') {
+        medium = "";
+        wordcount = "";
+        bpm = $('#bpm').val();
+        genre = $('#genre').val();
+    } else if(type == 'written') {
+        medium = "";
+        wordcount = $('#wordcount').val();
+        bpm = "";
+        genre = "";
+    } else {
+        medium = "";
+        wordcount = "";
+        bpm = "";
+        genre = "";
+    }
+
+    $.post(submission, {"cmd": "upload", "userid": userid, "title": title, "desc": desc, "keywords": keywords, "type": type, "medium": medium, "wordcount": wordcount, "bpm": bpm, "genre": genre}, function(data){
+        if(data == '0') {
+            err = "A problem happened";
+            $("#message").html(err);
+            $("#message").css("display", "block");
+        } else {
+            window.location.href = "/artshare/index.php"
+        }
+    });
+
+    return false;
+}
+
+// edit
+
+function editsub(userid, picid) {
+    title = $("#title").val();
+    desc = $("#desc").val();
+    keywords = $("#keywords").val();
+    $.post(submission, {"cmd": "edit", "userid": userid, "picid": picid, "userid": userid, "title": title, "desc": desc, "keywords": keywords,}, function(data){
+        if(data == '0') {
+            err = "A problem happened";
+            $("#message").html(err);
+            $("#message").css("display", "block");
+        } else {
+            window.location.href = "/artshare/places/submission.php?id=" + picid;
+        }
+    });
+    return false;
+}
+
+
 // submission page
 
 function showsubinfo(userid, picid) {
