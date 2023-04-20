@@ -1,8 +1,20 @@
 # Artshare
+
 Elijah Tate, Zoe Boyle
 Group 13
 CSC 4710
 March 24
+
+# Database structure
+
+- Comments(**comment_id**, *member_id*, *submission_id*, datepost, body)
+- Commission(**commission_id**, *commissioner_id*, *artist_id*, startdate, finish_date, price, payment)
+- Favorite(***member_id, submission_id***)
+- Member(**member_id**, username, password, email, birthday, join_date, about)
+- Submission(**submission_id**, *member_id*, title, upload_date, description, keywords)
+- Music(***submission_id***, genre, bpm)
+- Image(***submission_id***, medium)
+- Written(***submission_id***, word_count)
 
 # SQL used
 
@@ -214,14 +226,3 @@ INSERT INTO Comments (member_id, submission_id, datepost, body) VALUES ($userid,
 ```
 SELECT DISTINCT * FROM Submission WHERE title LIKE '%$search_query%' OR description LIKE '%$search_query%' OR keywords LIKE '%$search_query%'
 ```
-
-# Database structure
-
-- Comments(**comment_id**, *member_id*, *submission_id*, datepost, body)
-- Commission(**commission_id**, *commissioner_id*, *artist_id*, startdate, finish_date, price, payment)
-- Favorite(***member_id, submission_id***)
-- Member(**member_id**, username, password, email, birthday, join_date, about)
-- Submission(**submission_id**, *member_id*, title, upload_date, description, keywords)
-- Music(***submission_id***, genre, bpm)
-- Image(***submission_id***, medium)
-- Written(***submission_id***, word_count)
