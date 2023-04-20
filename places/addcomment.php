@@ -12,11 +12,11 @@
         </div>
         
         <div class = "cell">
-            <img src = "/artshare/assets/placeholder.png">
+            <img src = "/artshare/assets/<?php echo $picid ?>.png">
         </div>
 
         <div class = "cell">
-            <form onsubmit="return(comment('<?php echo $user . ',' . $picid ?>'))">
+            <form onsubmit="return(comment(<?php echo $user . ',' . $picid ?>))">
                 <label>Comment
                     <textarea placeholder="Write your comment here" name = "com" id="com"></textarea>
                 </label>

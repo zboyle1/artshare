@@ -27,7 +27,7 @@ function showunfinished() {
             JOIN Member ON Commission.artist_id = Member.member_id
             WHERE commissioner_id = $userid
             AND finish_date IS NULL
-            ORDER BY start_date ASC;";
+            ORDER BY startdate ASC;";
 
     $result = $conn->query($sql);
 
@@ -72,8 +72,8 @@ function showtodo() {
             FROM Commission
             JOIN Member ON Commission.commissioner_id = Member.member_id
             WHERE artist_id = $userid
-            WHERE finish_date IS NULL
-            ORDER BY start_date ASC;";
+            AND finish_date IS NULL
+            ORDER BY startdate ASC;";
 
     $result = $conn->query($sql);
 
@@ -185,13 +185,13 @@ function showfinished() {
 		while($row = mysqli_fetch_assoc($result)) {
             $commid = $row['commission_id'];
             $commissioner = $row['commissioner'];
-            $start_date = $row['startdate'];
+            $finish_date = $row['finish_date'];
             $price = $row['price'];
             $payment = $row['payment'];
 
             echo '<tr><td>' . $commid . '</td>' .
 				 '<td>' . $commissioner . '</td>' .
-				 '<td>' . $start_date . '</td>' .
+				 '<td>' . $finish_date . '</td>' .
                  '<td>' . $price . '</td>' .
                  '<td>' . $payment . '</td></tr>';
         }

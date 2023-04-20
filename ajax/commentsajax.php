@@ -24,7 +24,7 @@ function comment() {
     $userid = $_POST['userid'];
     $body = $_POST['body'];
 
-    $sql = "INSERT INTO Comments(member_id, submission_id, datepost, body) VALUES ($userid, $picid, curdate(), $body);";
+    $sql = "INSERT INTO Comments (member_id, submission_id, datepost, body) VALUES ($userid, $picid, curdate(), '$body');";
 
     $result = $conn->query($sql);
 }

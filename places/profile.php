@@ -47,7 +47,7 @@
 </div>
 
 <script>
-    user = "<?php echo $userid ?>"
+    user = "<?php echo $user ?>"
     
     prosubs(user);
     profavs(user);

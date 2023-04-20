@@ -88,7 +88,7 @@ function showpro() {
 
     $user = $_POST['user'];
 
-    $sql = "SELECT * FROM Member WHERE member_id = '$user'";
+    $sql = "SELECT * FROM Member WHERE username = '$user'";
     $result = $conn->query($sql);
 
     if(mysqli_num_rows($result) == 0) {

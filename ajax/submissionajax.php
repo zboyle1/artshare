@@ -187,11 +187,11 @@ function showsubpage() {
         }
 
         echo '<div class="cell" id="pagetitle">' .
-             '<h3>' . $title . ' by ' . $artist .  $allowedit . '</h3>' .
+             '<h3>' . $title . ' by <a href ="/artshare/places/profile.php?user=' . $artist . '">' . $artist . '</a>' . $allowedit . '</h3>' .
              '</div>' .
 
              '<div class = "cell" id="submission" style="margin-bottom:1em;">' .
-             '<img src = "/artshare/assets/6.png">' .
+             '<img src = "/artshare/assets/' . $picid . '.png">' .
              '</div>' .
               
              '<div class = "cell large-4 medium-4 small-6">' .
@@ -222,7 +222,12 @@ function showsubpage() {
 function profilesub() {
     global $conn;
 
-    $userid = $_POST['userid'];
+    $user = $_POST['userid'];
+    $sql = "SELECT member_id FROM Member WHERE username = '$user';";
+    $result = $conn->query($sql);
+    $row = mysqli_fetch_assoc($result);
+
+    $userid = $row['member_id'];
 
     $sql = "SELECT submission_id
             FROM Submission
@@ -246,7 +251,12 @@ function profilesub() {
 function profilefav() {
     global $conn;
 
-    $userid = $_POST['userid'];
+    $user = $_POST['userid'];
+    $sql = "SELECT member_id FROM Member WHERE username = '$user';";
+    $result = $conn->query($sql);
+    $row = mysqli_fetch_assoc($result);
+
+    $userid = $row['member_id'];
 
     $sql = "SELECT submission_id
             FROM Favorite
@@ -340,9 +350,7 @@ function isfav() {
 }
 
 function fav() {
-    $userid = $_POST['userid'];
-    $picid = $_POST['picid'];
-
+    
     global $conn;
 
     $userid = $_POST['userid'];
@@ -354,9 +362,6 @@ function fav() {
 }
 
 function unfav() {
-    $userid = $_POST['userid'];
-    $picid = $_POST['picid'];
-
     global $conn;
 
     $userid = $_POST['userid'];

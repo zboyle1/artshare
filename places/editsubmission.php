@@ -12,7 +12,7 @@
         </div>
         
         <div class = "cell">
-            <img src = "/artshare/assets/placeholder.png">
+            <img src = "/artshare/assets/<?php echo $picid ?>.png">
         </div>
 
         <div class = "cell">

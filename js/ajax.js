@@ -2,6 +2,7 @@ const account = "/artshare/ajax/accountajax.php";
 const commission = "/artshare/ajax/commissionsajax.php";
 const submission = "/artshare/ajax/submissionajax.php";
 const comments = "/artshare/ajax/commentsajax.php";
+const search = "/artshare/ajax/searchajax.php";
 
 // Login functions
 
@@ -268,4 +269,12 @@ function profavs(userid) {
     $.post(submission,{"cmd":"profilefav", "userid": userid,}, function(data){
         $("#userfav").html(data);
     });
+}
+
+function searchfor() {
+    searchquery = $('#search').val();
+    $.post(search,{"searchquery": searchquery}, function(data){
+        $("#results").html(data);
+    });
+    return false;
 }
