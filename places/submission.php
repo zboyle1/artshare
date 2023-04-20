@@ -16,7 +16,7 @@
     <div class="grid-x grid-padding-x">
         <div class="cell">
             <div class="button-group">
-                <a class="button" href="/artshare/addcomment.php?id=">Comment</a>
+                <a class="button" href="/artshare/places/addcomment.php?id=<?php echo $id ?>">Comment</a>
                 <a class="secondary button" onclick="unfav(<?php echo $userid . ',' . $id ?>)" id="un"><i class="fi-star"></i>
 Unfavorite</a>
                 <a class="warning button" onclick="fav(<?php echo $userid . ',' . $id ?>)" id="fav"><i class="fi-star hollow"></i>
@@ -26,26 +26,7 @@ Favorite</a>
     </div>
 
     <div class="grid-x grid-padding-x" id="comments">
-        <div class="cell">
-        <!-- from ajax -->
-            <div class="card expanded">
-                <div class="card-divider">
-                    <div class="grid-x grid-padding-x">
-                        <div class="cell auto">
-                            <b>Username</b>
-                        </div>
-                    
-                        <div class="cell shrink">
-                            Date
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-section">
-                    <p>Comment content goes here</p>
-                </div>
-            </div>
-        </div>
+        
     </div>
 </div>
 
@@ -55,7 +36,7 @@ Favorite</a>
 
     showsubinfo(userid, picid);
     isfav(userid, picid);
-    showcomments(userid, picid);
+    showcomments(picid);
 </script>    
 <?php
     send_footer();

@@ -47,8 +47,7 @@ function foryou() {
             $id = $row['submission_id'];
 
             echo '<a href = "/artshare/places/submission.php?id=' . $id . '">' .
-                 // '<img src="/artshare/assets/' . $id . '.png">'; 
-                 '<img src="/artshare/assets/placeholder.png">' .
+                 '<img src="/artshare/assets/' . $id . '.png">'.
                  '</a>';
         }
     } else {
@@ -69,8 +68,7 @@ function newest() {
             $id = $row['submission_id'];
 
             echo '<a href = "/artshare/places/submission.php?id=' . $id . '">' .
-                 // '<img src="/artshare/assets/' . $id . '.png">'; 
-                 '<img src="/artshare/assets/placeholder.png">' .
+                 '<img src="/artshare/assets/' . $id . '.png">'.
                  '</a>';
         }
     } else {
@@ -94,8 +92,7 @@ function popular() {
             $id = $row['submission_id'];
 
             echo '<a href = "/artshare/places/submission.php?id=' . $id . '">' .
-                 // '<img src="/artshare/assets/' . $id . '.png">'; 
-                 '<img src="/artshare/assets/placeholder.png">' .
+                 '<img src="/artshare/assets/' . $id . '.png">'.
                  '</a>';
         }
     } else {
@@ -118,9 +115,8 @@ function talkedabout() {
         while($row = mysqli_fetch_assoc($result)) {
             $id = $row['submission_id'];
 
-            echo '<a href = "/artshare/places/submission.phpid=' . $id . '">' .
-                 // '<img src="/artshare/assets/' . $id . '.png">'; 
-                 '<img src="/artshare/assets/placeholder.png">' .
+            echo '<a href = "/artshare/places/submission.php?id=' . $id . '">' .
+                 '<img src="/artshare/assets/' . $id . '.png">'.
                  '</a>';
         }
     } else {
@@ -195,7 +191,7 @@ function showsubpage() {
              '</div>' .
 
              '<div class = "cell" id="submission" style="margin-bottom:1em;">' .
-             '<img src = "/artshare/assets/placeholder.png">' .
+             '<img src = "/artshare/assets/6.png">' .
              '</div>' .
               
              '<div class = "cell large-4 medium-4 small-6">' .
@@ -224,11 +220,51 @@ function showsubpage() {
 }
 
 function profilesub() {
+    global $conn;
 
+    $userid = $_POST['userid'];
+
+    $sql = "SELECT submission_id
+            FROM Submission
+            WHERE member_ID = $userid";
+
+    $result = $conn->query($sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+            $id = $row['submission_id'];
+
+            echo '<a href = "/artshare/places/submission.php?id=' . $id . '">' .
+                 '<img src="/artshare/assets/' . $id . '.png">'.
+                 '</a>';
+        }
+    } else {
+        echo 'An error occured';
+    }
 }
 
 function profilefav() {
+    global $conn;
 
+    $userid = $_POST['userid'];
+
+    $sql = "SELECT submission_id
+            FROM Favorite
+            WHERE member_ID = $userid";
+
+    $result = $conn->query($sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+            $id = $row['submission_id'];
+
+            echo '<a href = "/artshare/places/submission.php?id=' . $id . '">' .
+                 '<img src="/artshare/assets/' . $id . '.png">';
+                 '</a>';
+        }
+    } else {
+        echo 'An error occured';
+    }
 }
 
 function upload() {

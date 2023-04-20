@@ -83,6 +83,59 @@ function signup() {
     echo '3';
 }
 
+function showpro() {
+    global $conn;
+
+    $user = $_POST['user'];
+
+    $sql = "SELECT * FROM Member WHERE member_id = '$user'";
+    $result = $conn->query($sql);
+
+    if(mysqli_num_rows($result) == 0) {
+        echo '<div class ="cell"><div class ="callout">User not found</div></div>';
+    } else {
+        $row = mysqli_fetch_assoc($result);
+
+        $username = $row['username'];
+        $email = $row['e_mail'];
+        $birthday = $row['birthday'];
+        $join = $row['join_date'];
+        $about = $row['about'];
+
+        $age = date_diff(date_create($birthday), date_create('now'))->y;
+
+        echo '<div class = "cell large-6 medium-6 small-6">' .
+             '<h3 class="subheader">User Information</h3>' .
+             '<table>' .
+             '<tr>' .
+             '<td><b>Username:</b></td>' .
+             '<td>' . $username . '</td>' .
+             '</tr>' .
+             '<tr>' .
+             '<td><b>Email:</b></td>' .
+             '<td>' . $email . '</td>' .
+             '</tr>' .
+             '<tr>' .    
+             '<td><b>Age:</b></td>' .
+             '<td>' . $age . '</td>' .
+             '</tr>' .
+             '<tr>' .    
+             '<td><b>Join date:</b></td>' .
+             '<td>' . $join . '</td>' .
+             '</tr>' .
+             '</table>' .
+             '</div>' .
+
+             '<div class = "cell large-6 medium-6 small-6">' .
+             '<h3 class="subheader">About </h3>' .
+             '<div class = "callout" id="about">'. 
+             $about .
+             '</div>' .
+             '</div>';
+    }
+
+}
+
 $cmd = $_POST['cmd'];
 
 if($cmd == 'login') {
@@ -91,6 +144,8 @@ if($cmd == 'login') {
     logout();
 } else if ($cmd == 'signup') {
     signup();
+} else if ($cmd == 'showpro') {
+    showpro();
 }
 
 mysqli_close($conn);

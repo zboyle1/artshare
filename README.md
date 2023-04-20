@@ -112,6 +112,11 @@
             AND finish_date IS NOT NULL
             ORDER BY finish_date DESC;
 
+        ## submit
+            INSERT INTO Submission (submission_id, user_ID, title, upload_date, description, keywords)
+            VALUES ($picid, $userid, $title, curdate(), $desc, $keywords');
+
+
         ## page of a submission
 
             ## display submission information
@@ -123,6 +128,10 @@
                 ) AS comment_count
                 FROM Submission s
                 WHERE s.submission_id = $picid;
+ 
+            ## find image type
+            
+                SELECT * FROM $type WHERE submission_id = $picid;
 
             ## allow user to edit submission
 
@@ -154,9 +163,10 @@
 
             ## show all commments
 
-                SELECT c.*
+                SELECT c.*, m.username
                 FROM Submission s
                 JOIN Comments c ON s.submission_id = c.submission_id
+                JOIN Members m ON c.user_id = m.user_id
                 WHERE s.submission_id = $picid;
 
             ## user delete comment

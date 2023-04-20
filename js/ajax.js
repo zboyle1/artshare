@@ -1,6 +1,7 @@
 const account = "/artshare/ajax/accountajax.php";
 const commission = "/artshare/ajax/commissionsajax.php";
 const submission = "/artshare/ajax/submissionajax.php";
+const comments = "/artshare/ajax/commentsajax.php";
 
 // Login functions
 
@@ -205,6 +206,21 @@ function showsubinfo(userid, picid) {
     });
 }
 
+function comment(userid, picid) {
+    body = $("#com").val();
+    $.post(comments, {"cmd": "comment", "userid": userid, "picid": picid, "body":body}, function(data) {
+        window.location.href = "/artshare/places/submission.php?id=" + picid;
+    });
+    return false;
+}
+
+function showcomments(picid) {
+    $.post(comments, {"cmd": "show", "picid": picid}, function(data) {
+        $("#comments").html(data);
+    });
+}
+
+
 // favorites
 function isfav(userid,picid) {
     $.post(submission,{"cmd":"isfav","userid": userid, "picid": picid}, function(data){
@@ -233,5 +249,23 @@ function unfav(userid,picid) {
             $("#fav").css("display", "block");
             $("#un").css("display", "none");
         }
+    });
+}
+
+function profile(user) {
+    $.post(account,{"cmd":"showpro", "user": user}, function(data){
+         $("#userinfo").html(data);
+    });
+}
+
+function prosubs(userid) {
+    $.post(submission,{"cmd":"profilesub", "userid": userid,}, function(data){
+        $("#usersub").html(data);
+    });
+}
+
+function profavs(userid) {
+    $.post(submission,{"cmd":"profilefav", "userid": userid,}, function(data){
+        $("#userfav").html(data);
     });
 }
