@@ -1,6 +1,7 @@
 const account = "/artshare/ajax/accountajax.php";
 const commission = "/artshare/ajax/commissionsajax.php";
 const submission = "/artshare/ajax/submissionajax.php";
+const search = "/artshare/ajax/search.php";
 
 // Login functions
 
@@ -128,4 +129,13 @@ function talkedabout() {
         $("#talkedabout").html(data);
     });
     return(false);
+}
+
+// Search
+
+function searchfor(searchQuery) {
+    $.post(search, {"search": searchQuery}, function(data) {
+        $("#search").html(data);
+    });
+    return false;
 }
