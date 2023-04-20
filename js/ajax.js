@@ -204,3 +204,34 @@ function showsubinfo(userid, picid) {
         }
     });
 }
+
+// favorites
+function isfav(userid,picid) {
+    $.post(submission,{"cmd":"isfav","userid": userid, "picid": picid}, function(data){
+        if(data == '1') {
+            $("#un").css("display", "block");
+            $("#fav").css("display", "none");
+        } else if(data=='0') {
+            $("#fav").css("display", "block");
+            $("#un").css("display", "none");
+        }
+    });
+}
+
+function fav(userid,picid) {
+    $.post(submission,{"cmd":"fav", "userid":userid, "picid": picid}, function(data){
+        if(data == '1') {
+            $("#un").css("display", "block");
+            $("#fav").css("display", "none");
+        }
+    });
+}
+
+function unfav(userid,picid) {
+    $.post(submission,{"cmd":"unfav", "userid":userid, "picid": picid}, function(data){
+        if(data == '1') {
+            $("#fav").css("display", "block");
+            $("#un").css("display", "none");
+        }
+    });
+}

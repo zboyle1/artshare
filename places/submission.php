@@ -16,10 +16,10 @@
     <div class="grid-x grid-padding-x">
         <div class="cell">
             <div class="button-group">
-                <a class="button" href="/artshare/newcomment.php?id=">Comment</a>
-                <a class="secondary button" onclick="unfavorite(<?php echo $userid . ',' . $id ?>)" id="un"><i class="fi-star"></i>
+                <a class="button" href="/artshare/addcomment.php?id=">Comment</a>
+                <a class="secondary button" onclick="unfav(<?php echo $userid . ',' . $id ?>)" id="un"><i class="fi-star"></i>
 Unfavorite</a>
-                <a class="warning button" onclick="favorite(<?php echo $userid . ',' . $id ?>)" id="fav"><i class="fi-star hollow"></i>
+                <a class="warning button" onclick="fav(<?php echo $userid . ',' . $id ?>)" id="fav"><i class="fi-star hollow"></i>
 Favorite</a>
             </div>
         </div>
@@ -32,7 +32,6 @@ Favorite</a>
                 <div class="card-divider">
                     <div class="grid-x grid-padding-x">
                         <div class="cell auto">
-                            <?php echo ($_SESSION['user'] != $_GET['user']) ? '' : '<a onclick="false"><i class="fi-pencil"></i></a>';?>
                             <b>Username</b>
                         </div>
                     
@@ -55,6 +54,8 @@ Favorite</a>
     userid = <?php echo $userid ?>;
 
     showsubinfo(userid, picid);
+    isfav(userid, picid);
+    showcomments(userid, picid);
 </script>    
 <?php
     send_footer();

@@ -287,6 +287,50 @@ function edit() {
     $result = $conn->query($sql);
 }
 
+function isfav() {
+    global $conn;
+
+    $userid = $_POST['userid'];
+    $picid = $_POST['picid'];
+
+    $sql = "SELECT * FROM Favorite WHERE submission_id = $picid AND member_id = $userid";
+    $result = $conn->query($sql);
+
+    if(mysqli_num_rows($result) == 0) {
+        echo '0';
+    } else {
+        echo '1';
+    }
+}
+
+function fav() {
+    $userid = $_POST['userid'];
+    $picid = $_POST['picid'];
+
+    global $conn;
+
+    $userid = $_POST['userid'];
+    $picid = $_POST['picid'];
+
+    $sql = "INSERT INTO Favorite(submission_id, member_id) VALUES($picid, $userid);";
+    $result = $conn->query($sql);
+    echo '1';
+}
+
+function unfav() {
+    $userid = $_POST['userid'];
+    $picid = $_POST['picid'];
+
+    global $conn;
+
+    $userid = $_POST['userid'];
+    $picid = $_POST['picid'];
+
+    $sql = "DELETE FROM Favorite WHERE submission_id = $picid AND member_id = $userid";
+    $result = $conn->query($sql);
+    echo '1';
+}
+
 $cmd = $_POST['cmd'];
 
 if($cmd == 'foryou') {
@@ -307,6 +351,12 @@ if($cmd == 'foryou') {
     upload();
 } else if($cmd == 'edit') {
     edit();
+} else if($cmd == 'isfav') {
+    isfav();
+} else if($cmd == 'fav') {
+    fav();
+} else if($cmd == 'unfav') {
+    unfav();
 }
 
 mysqli_close($conn);
