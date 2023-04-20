@@ -1,11 +1,5 @@
 <?php
 
-/* Account functions
- * - Login, logout
- * - Signup
- * - Display user information
- */
-
 define( 'DB_NAME', 'Artshare' );
 define( 'DB_USER', 'Coral' );
 define( 'DB_PASSWORD', ')78S]37r%V5u');

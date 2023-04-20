@@ -1,12 +1,5 @@
 <?php
 
-/* Operations done mainly on submissions
- * - displaying submissions
- * - Inserting new submissions
- * - Deleting submissions
- * - Favortie / Unfavorite
- */
-
 define( 'DB_NAME', 'Artshare' );
 define( 'DB_USER', 'Coral' );
 define( 'DB_PASSWORD', ')78S]37r%V5u');
@@ -124,6 +117,7 @@ function talkedabout() {
     }
 }
 
+// Submission page
 function showsubpage() {
     global $conn;
 
@@ -219,6 +213,7 @@ function showsubpage() {
     }
 }
 
+// Profile
 function profilesub() {
     global $conn;
 
